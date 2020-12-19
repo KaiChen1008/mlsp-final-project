@@ -76,6 +76,8 @@ if args.resume:
         checkpoint = torch.load('./checkpoint/ckpt.t7.' + args.sess + '_' + str(args.seed)+ '_smooth')
     else:
         checkpoint = torch.load('./checkpoint/ckpt.t7.' + args.sess + '_' + str(args.seed))
+
+
     net = checkpoint['net']
     best_acc = checkpoint['acc']
     start_epoch = checkpoint['epoch'] + 1
@@ -195,7 +197,7 @@ def test(epoch,is_adv=False):
 
     # Save checkpoint.
     acc = 100. * correct / total
-    if acc > best_acc and is_adv == False:
+    if acc > best_acc:
         best_acc = acc
         checkpoint(acc, epoch)
     return (test_loss / batch_idx, 100. * correct / total)
